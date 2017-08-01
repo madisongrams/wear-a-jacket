@@ -8,7 +8,6 @@
 }
 
 h2 {
-
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
   font-size: 40px;
   font-weight:lighter;
@@ -24,6 +23,7 @@ header {
     text-align: center;
 }
 input {
+    border-radius: 2px;
     border: none;
     margin-bottom: 20px;
     opacity: 1;
@@ -45,6 +45,7 @@ h4 {
   opacity: 1;
 }
 div {
+  border-radius: 2px;
   padding-top: 50px;
   font-family: "Avant Garde", Avantgarde, "Century Gothic", CenturyGothic, AppleGothic, sans-serif;
   /*background-color: #5b8fb7;*/
