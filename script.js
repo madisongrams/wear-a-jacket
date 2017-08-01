@@ -2,17 +2,19 @@ $(document).ready(function(){
 
     var getWeather = function() {
 
-      var city = $('#term').val();
+      var cityZip = $('#term').val();
+      var country = $('#country').find(":selected").val();
       var units = $('input[name=temp]:checked').val();
       console.log(units);
+      console.log(country);
 
-      if (city == '') {
+      if (cityZip == '') {
           $('#weatherData').html("<h3> Enter a city!</h3>");
       } else {
           $('#weatherData').html("<h3> Retrieving weather info...</h3>");
-          $.getJSON("http://api.openweathermap.org/data/2.5/find?q=" + city + "&units=" + units + "&type=like&callback=?&APPID=a1f60ac3046896aea81666eb8854d7cc", function(json) {
+          $.getJSON("http://api.openweathermap.org/data/2.5/find?q=" + cityZip + "," + country + "&units=" + units + "&type=like&callback=?&APPID=a1f60ac3046896aea81666eb8854d7cc", function(json) {
             console.log(json);
-            if (json.cod == "200") {
+            if (json.cod == "200" && json.count > 0) {
                 var temp = Math.round(json.list["0"].main.temp);
            
                 var jacket;
