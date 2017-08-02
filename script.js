@@ -3,7 +3,13 @@ function getWeather(url, units, fromLocation) {
   $.getJSON(url, function(json){
     console.log(json);
     if (json.cod == "200" && (json.count > 0 || fromLocation)) {
-        var temp = Math.round(json.list["0"].main.temp);
+        var jsonCity;
+        if (fromLocation) {
+            jsonCity = json;
+        } else {
+            jsonCity = (json.list["0"]);
+        }
+        var temp = Math.round(jsonCity.main.temp);
 
         var jacket;
         if ((temp < 60 && units == "imperial") || (temp < 15.5)) {
@@ -12,9 +18,9 @@ function getWeather(url, units, fromLocation) {
             jacket = "you'll be fine without a jacket!";
         }
         if (units == "imperial") {
-            $('#weatherData').html('<h3>You\'re in '+ json.list["0"].name + "! The temperature is " + temp + ' degrees fahrenheit!</h3><br/> <p>' + jacket + '</p>');
+            $('#weatherData').html('<h3>You\'re in '+ jsonCity.name + "! The temperature is " + temp + ' degrees fahrenheit!</h3><br/> <p>' + jacket + '</p>');
         } else {
-          $('#weatherData').html('<h3>You\'re in '+ json.list["0"].name + "! The temperature is " + temp + ' degrees celsius!</h3><br/> <p>' + jacket + '</p>');
+          $('#weatherData').html('<h3>You\'re in '+ jsonCity.name + "! The temperature is " + temp + ' degrees celsius!</h3><br/> <p>' + jacket + '</p>');
         }
     } else {
         $('#weatherData').html("<h3>Can't find that city...</h3>");
