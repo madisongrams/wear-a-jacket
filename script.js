@@ -1,8 +1,8 @@
-function getWeather(url, units) {
+function getWeather(url, units, fromLocation) {
   $('#weatherData').html("<h3> Retrieving weather info...</h3>");
   $.getJSON(url, function(json){
     console.log(json);
-    if (json.cod == "200" && json.count > 0) {
+    if (json.cod == "200" && (json.count > 0 || fromLocation)) {
         var temp = Math.round(json.list["0"].main.temp);
 
         var jacket;
@@ -32,7 +32,7 @@ $(document).ready(function(){
               var lat = position.coords.latitude;
               var long = position.coords.longitude;
               var url = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + long + '&units=imperial&APPID=a1f60ac3046896aea81666eb8854d7cc';
-              getWeather(url, units);
+              getWeather(url, units, true);
           });
         } else {
             $('#weatherData').html("<h3>Can't find location.</h3>");
@@ -48,8 +48,8 @@ $(document).ready(function(){
               $('#weatherData').html("<h3> Enter a city!</h3>");
               return false;
           } else {
-              url = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/find?q=' + cityZip + ',' + country + '&units=' + units + '&type=like&APPID=a1f60ac3046896aea81666eb8854d7cc';
-              getWeather(url, units);
+              var url = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/find?q=' + cityZip + ',' + country + '&units=' + units + '&type=like&APPID=a1f60ac3046896aea81666eb8854d7cc';
+              getWeather(url, units, false);
           }
       return false;
     }
