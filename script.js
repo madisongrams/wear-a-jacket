@@ -37,7 +37,7 @@ $(document).ready(function(){
           navigator.geolocation.getCurrentPosition(function(position) {
               var lat = position.coords.latitude;
               var long = position.coords.longitude;
-              var url = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + long + '&units=imperial&APPID=a1f60ac3046896aea81666eb8854d7cc';
+              var url = 'https://cors-anywhere.herokuapp.com/http://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + long + '&units=' + units + '&APPID=a1f60ac3046896aea81666eb8854d7cc';
               getWeather(url, units, true);
           });
         } else {
